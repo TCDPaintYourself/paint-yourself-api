@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "paint-yourself-api"
+version = "1.0.0"
+description = "API for the Paint Yourself mobile application"
+authors = [
+	"Claire Cassidy <clcassid@tcd.ie>",
+	"Daniel Nugent <nugentd2@tcd.ie>",
+	"David Kubala <kubalad@tcd.ie>",
+	"John Sinclair <sinclajo@tcd.ie>",
+	"Lexes Jan Mantiquilla <mantiqul@tcd.ie>",
+	"Yi Xiang Tan <tany3@tcd.ie>",
+]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.73.0"
+uvicorn = { extras = ["standard"], version = "^0.17.4" }
+python-multipart = "^0.0.5"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
