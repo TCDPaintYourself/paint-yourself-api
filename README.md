@@ -30,12 +30,20 @@ You will need to have installed:
    ```bash
    poetry install
    ```
+   OR
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+   and skip to last step
 
 1. Activate the python virtual environment.
 
    ```bash
    poetry shell
    ```
+   
+
 
 1. Run the server.
 
