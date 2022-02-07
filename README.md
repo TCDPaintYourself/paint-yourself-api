@@ -31,6 +31,12 @@ You will need to have installed:
    poetry install
    ```
 
+1. Activate the python virtual environment.
+
+   ```bash
+   poetry shell
+   ```
+
 1. Run the server.
 
    ```bash
