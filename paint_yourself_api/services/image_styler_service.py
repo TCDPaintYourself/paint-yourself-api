@@ -1,6 +1,6 @@
 import io
 import typing
-from paint_yourself_api.schemas.styled_images import StyledImageThemeEnum
+from paint_yourself_api.schemas import StyledImageThemeEnum
 
 
 class ImageStylerService:
