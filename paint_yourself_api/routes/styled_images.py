@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, File, UploadFile
 from fastapi.responses import StreamingResponse
+
 from paint_yourself_api.schemas import StyledImageThemeEnum
 from paint_yourself_api.services import ImageStylerService
-
 
 router = APIRouter()
 

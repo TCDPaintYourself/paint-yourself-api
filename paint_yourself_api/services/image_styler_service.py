@@ -1,5 +1,6 @@
 import io
 import typing
+
 from paint_yourself_api.schemas import StyledImageThemeEnum
 
 

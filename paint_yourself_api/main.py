@@ -1,11 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from paint_yourself_api.routes import routes
 
-
 app = FastAPI()
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
