@@ -25,7 +25,7 @@ You will need to have installed:
    cd paint-yourself-api
    ```
 
-1. Install the dependencies
+1. Install the dependencies.
 
    ```bash
    poetry install
@@ -35,7 +35,7 @@ You will need to have installed:
    ```bash
    pip install -r requirements.txt
    ```
-   and skip to last step
+   And skip to last step.
 
 1. Activate the python virtual environment.
 
