@@ -42,8 +42,6 @@ You will need to have installed:
    ```bash
    poetry shell
    ```
-   
-
 
 1. Run the server.
 
