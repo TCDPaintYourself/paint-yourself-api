@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, File, UploadFile
+from typing import Optional
+
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
 from fastapi_cloudauth.firebase import FirebaseClaims
 
@@ -14,11 +16,22 @@ def create_styled_image(
     *,
     _: FirebaseClaims = Depends(verify_authentication),
     image_styler_service: ImageStylerService = Depends(ImageStylerService),
-    image: UploadFile = File(..., description="Image to be styled."),
-    theme: StyledImageThemeEnum,
+    input_image: UploadFile = File(..., description="Image to be styled."),
+    reference_image: Optional[UploadFile] = None,
+    theme: Optional[StyledImageThemeEnum] = None,
 ):
-    """Endpoint used to apply the theme to user submitted images."""
+    """Endpoint used to apply the style or theme to user submitted images."""
 
-    themed_image = image_styler_service.create_themed_image(image.file, theme)
+    if reference_image is None and theme is None:
+        raise HTTPException(400, detail="Theme is missing")
 
-    return StreamingResponse(themed_image, media_type=image.content_type)
+    output_image = None
+
+    if theme:
+        output_image = image_styler_service.create_themed_image(input_image.file, theme)
+    else:
+        output_image = image_styler_service.create_styled_image(
+            input_image.file, reference_image.file
+        )
+
+    return StreamingResponse(output_image, media_type=input_image.content_type)
