@@ -8,6 +8,9 @@ import numpy as np
 
 class ImageStylerService:
     """Service used to style user submitted images."""
+    def __init__(self):
+        self.styler = StyleTransfer()
+
 
     def create_styled_image(
         self, image: typing.BinaryIO, reference_image: typing.BinaryIO
@@ -21,16 +24,15 @@ class ImageStylerService:
                 f_bytes = f.read()
                 r_f_bytes = r_f.read()
 
-                input_image = np.array(f_bytes, dtype=np.uint8)
-                theme_image = np.array(r_f_bytes, dtype=np.uint8)
+                input_image = np.fromstring(f_bytes.decode("utf-8") , dtype=np.uint8)
+                theme_image = np.fromstring(r_f_bytes.decode("utf-8") , dtype=np.uint8)
 
                 input_path = './paint-yourself-api/paint_yourself_api/input/input.png'
                 theme_path = './paint-yourself-api/paint_yourself_api/input/theme.png'
                 cv.imwrite(input_image, input_path)
                 cv.imwrite(theme_image, theme_path)
 
-                styler = StyleTransfer()
-                stylized = styler.paint_image('./samples/Daniel.png', './styles/Cezanne/215466.jpg')
+                stylized = self.styler.paint_image('./samples/Daniel.png', './styles/Cezanne/215466.jpg')
 
                 is_success, im_buf_arr = cv.imencode(".jpg", stylized)
                 byte_im = im_buf_arr.tobytes()
