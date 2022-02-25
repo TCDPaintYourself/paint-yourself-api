@@ -4,6 +4,10 @@ from enum import Enum
 class StyledImageThemeEnum(str, Enum):
     """Enum containing the allowed themes."""
 
-    # TODO: Replace example themes.
-    starry_night = "starry-night"
-    sunflowers = "sunflowers"
+    van_gogh = "Van Gogh"
+    claude_monet = "Claude Monet"
+    rembrandt = "Rembrandt"
+    whistler = "Whistler"
+    picasso = "Picasso"
+    da_vinci = "Da Vinci"
+    caravaggio = "Caravaggio"
