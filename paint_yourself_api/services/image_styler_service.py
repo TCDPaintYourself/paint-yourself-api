@@ -2,7 +2,7 @@ import io
 import typing
 
 from paint_yourself_api.schemas import StyledImageThemeEnum
-from paint_yourself_api.vgg_style_transfer import StyleTransfer
+from paint_yourself_api.services.vgg_style_transfer import StyleTransfer
 import cv2 as cv
 import numpy as np
 
@@ -23,6 +23,7 @@ class ImageStylerService:
 
                 input_image = np.array(f_bytes, dtype=np.uint8)
                 theme_image = np.array(r_f_bytes, dtype=np.uint8)
+
                 input_path = './paint-yourself-api/paint_yourself_api/input/input.png'
                 theme_path = './paint-yourself-api/paint_yourself_api/input/theme.png'
                 cv.imwrite(input_image, input_path)
