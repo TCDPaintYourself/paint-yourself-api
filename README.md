@@ -46,12 +46,12 @@ You will need to have installed:
 1. Run the server.
 
    ```bash
-   uvicorn paint_yourself_api.main:app --reload
+   uvicorn paint_yourself_api.main:app --reload --host 0.0.0.0 --port 8080
    ```
 
    Alternatively, if you are using VSCode, you can use `f5` to launch a debug
    session (ensure that you have set up the [poetry python
    environment](https://code.visualstudio.com/docs/python/environments#_select-and-activate-an-environment)).
 
-The API will be deployed locally at <http://localhost:8000> and the API
-documentation can be found at <http://localhost:8000/docs>.
+The API will be deployed locally at <http://localhost:8080> and the API
+documentation can be found at <http://localhost:8080/docs>.
