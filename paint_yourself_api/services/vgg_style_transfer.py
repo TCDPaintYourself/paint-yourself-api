@@ -22,7 +22,6 @@ class StyleTransfer:
 
     def load_img(self, path_to_img):
         max_dim = 512
-        print("PATH:", path_to_img)
         img = tf.io.read_file(path_to_img)
         img = tf.image.decode_image(img, channels=3)
         img = tf.image.convert_image_dtype(img, tf.float32)

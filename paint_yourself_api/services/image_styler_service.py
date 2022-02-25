@@ -32,7 +32,7 @@ class ImageStylerService:
 
                 input_path = "./paint_yourself_api/input/input.png"
                 theme_path = "./paint_yourself_api/input/theme.png"
-                print(os.listdir("."))
+
                 cv.imwrite(input_path, input_image)
                 cv.imwrite(theme_path, theme_image)
 
