@@ -6,7 +6,7 @@ from fastapi_cloudauth.firebase import FirebaseClaims
 
 from paint_yourself_api.middlewares import verify_authentication
 from paint_yourself_api.schemas import StyledImageThemeEnum
-from paint_yourself_api.services import ImageStylerService
+from paint_yourself_api.services import ImageStylerService, get_image_styler_service
 
 router = APIRouter()
 
@@ -14,8 +14,8 @@ router = APIRouter()
 @router.post("")
 def create_styled_image(
     *,
-    _: FirebaseClaims = Depends(verify_authentication),
-    image_styler_service: ImageStylerService = Depends(ImageStylerService),
+    # _: FirebaseClaims = Depends(verify_authentication),
+    image_styler_service: ImageStylerService = Depends(get_image_styler_service),
     input_image: UploadFile = File(..., description="Image to be styled."),
     reference_image: Optional[UploadFile] = None,
     theme: Optional[StyledImageThemeEnum] = None,
