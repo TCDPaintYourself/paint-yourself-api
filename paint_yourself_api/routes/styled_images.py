@@ -14,7 +14,7 @@ router = APIRouter()
 @router.post("")
 def create_styled_image(
     *,
-    # _: FirebaseClaims = Depends(verify_authentication),
+    _: FirebaseClaims = Depends(verify_authentication),
     image_styler_service: ImageStylerService = Depends(ImageStylerService),
     input_image: UploadFile = File(..., description="Image to be styled."),
     reference_image: Optional[UploadFile] = None,
