@@ -55,7 +55,7 @@ class ImageStylerService:
             input_image = cv.imdecode(np.frombuffer(f_bytes, dtype=np.uint8), 1)
 
             reference_image = cv.imread(
-                f"./paint_yourself_api/themes/{StyledImageThemeEnum[theme].value}.jpg"
+                f"./paint_yourself_api/themes/{theme.value}.jpg"
             )
 
             theme_image = reference_image
