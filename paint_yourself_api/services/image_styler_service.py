@@ -54,24 +54,9 @@ class ImageStylerService:
 
             input_image = cv.imdecode(np.frombuffer(f_bytes, dtype=np.uint8), 1)
 
-            reference_image = None
-
-            if theme == StyledImageThemeEnum.van_gogh:
-                reference_image = cv.imread("./paint_yourself_api/themes/vangogh.jpg")
-            if theme == StyledImageThemeEnum.caravaggio:
-                reference_image = cv.imread(
-                    "./paint_yourself_api/themes/caravaggio.jpg"
-                )
-            elif theme == StyledImageThemeEnum.claude_monet:
-                reference_image = cv.imread("./paint_yourself_api/themes/monet.jpg")
-            elif theme == StyledImageThemeEnum.da_vinci:
-                reference_image = cv.imread("./paint_yourself_api/themes/davinci.jpg")
-            elif theme == StyledImageThemeEnum.picasso:
-                reference_image = cv.imread("./paint_yourself_api/themes/picasso.jpg")
-            elif theme == StyledImageThemeEnum.rembrandt:
-                reference_image = cv.imread("./paint_yourself_api/themes/rembrandt.jpg")
-            elif theme == StyledImageThemeEnum.whistler:
-                reference_image = cv.imread("./paint_yourself_api/themes/whistler.jpg")
+            reference_image = cv.imread(
+                f"./paint_yourself_api/themes/{StyledImageThemeEnum[theme].value}.jpg"
+            )
 
             theme_image = reference_image
             input_path = "./paint_yourself_api/input/input.png"
