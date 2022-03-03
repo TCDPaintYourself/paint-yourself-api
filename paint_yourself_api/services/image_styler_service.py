@@ -26,18 +26,9 @@ class ImageStylerService:
         with image as f:
             with reference_image as r_f:
                 f_bytes = f.read()
-                r_f_bytes = r_f.read()
+                r_bytes = r_f.read()
 
-                input_image = cv.imdecode(np.frombuffer(f_bytes, dtype=np.uint8), 1)
-                theme_image = cv.imdecode(np.frombuffer(r_f_bytes, dtype=np.uint8), 1)
-
-                input_path = "./paint_yourself_api/input/input.png"
-                theme_path = "./paint_yourself_api/input/theme.png"
-
-                cv.imwrite(input_path, input_image)
-                cv.imwrite(theme_path, theme_image)
-
-                stylized = self.styler.paint_image(input_path, theme_path)
+                stylized = self.styler.paint_image(f_bytes, r_bytes)
 
                 is_success, im_buf_arr = cv.imencode(".jpg", stylized)
                 byte_im = im_buf_arr.tobytes()
@@ -49,28 +40,18 @@ class ImageStylerService:
     ) -> typing.BinaryIO:
         """Applies a theme to the image."""
 
+        theme_image_path = f"./paint_yourself_api/themes/{theme.value}.jpg"
+
         with image as f:
-            f_bytes = f.read()
+            with open(theme_image_path, "rb") as t_f:
+                f_bytes = f.read()
+                t_bytes = t_f.read()
+                stylized = self.styler.paint_image(f_bytes, t_bytes)
 
-            input_image = cv.imdecode(np.frombuffer(f_bytes, dtype=np.uint8), 1)
+                _, im_buf_arr = cv.imencode(".jpg", stylized)
+                byte_im = im_buf_arr.tobytes()
 
-            reference_image = cv.imread(
-                f"./paint_yourself_api/themes/{theme.value}.jpg"
-            )
-
-            theme_image = reference_image
-            input_path = "./paint_yourself_api/input/input.png"
-            theme_path = "./paint_yourself_api/input/theme.png"
-
-            cv.imwrite(input_path, input_image)
-            cv.imwrite(theme_path, theme_image)
-
-            stylized = self.styler.paint_image(input_path, theme_path)
-
-            is_success, im_buf_arr = cv.imencode(".jpg", stylized)
-            byte_im = im_buf_arr.tobytes()
-
-            return io.BytesIO(byte_im)
+                return io.BytesIO(byte_im)
 
 
 def get_image_styler_service(

@@ -21,9 +21,9 @@ class StyleTransfer:
             tensor = tensor[0]
         return PIL.Image.fromarray(tensor)
 
-    def load_img(self, path_to_img):
+    def load_img(self, image_bytes):
         max_dim = 512
-        img = tf.io.read_file(path_to_img)
+        img = tf.constant(image_bytes, dtype=tf.string)
         img = tf.image.decode_image(img, channels=3)
         img = tf.image.convert_image_dtype(img, tf.float32)
 
@@ -37,10 +37,10 @@ class StyleTransfer:
         img = img[tf.newaxis, :]
         return img
 
-    def paint_image(self, input_image_path, input_style_path):
+    def paint_image(self, input_image_bytes, input_style_bytes):
         # Load an input image & style into a tensor
-        input_image = self.load_img(input_image_path)
-        input_style = self.load_img(input_style_path)
+        input_image = self.load_img(input_image_bytes)
+        input_style = self.load_img(input_style_bytes)
 
         # # Show the image and reference image
         # cv.imshow('image', cv.cvtColor(np.array(self.tensor_to_image(input_image)), cv.COLOR_BGR2RGB))
