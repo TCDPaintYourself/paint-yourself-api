@@ -1,3 +1,4 @@
+import functools
 import os
 
 import cv2 as cv
@@ -64,11 +65,7 @@ class StyleTransfer:
         return stylized_image
 
 
-if __name__ == "__main__":
-    # Load the painting model
-    s = StyleTransfer()
-
-    image = s.paint_image("./samples/Daniel.png", "./styles/Cezanne/215466.jpg")
-
-    cv.imshow("image", image)
-    cv.waitKey(0)
+# Hack to ensure that StyleTransfer is a singleton.
+@functools.lru_cache(maxsize=1)
+def get_style_transfer() -> StyleTransfer:
+    return StyleTransfer()
